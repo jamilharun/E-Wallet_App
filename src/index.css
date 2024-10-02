@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .landingPages {
+        @apply w-3/4
+    }
+    .lanInpCon {
+        @apply pt-5 
+    }
+
+    .inpAuth {
+      @apply flex flex-row p-2 mt-2  border-2 border-EWpurple;
+    }
+}
