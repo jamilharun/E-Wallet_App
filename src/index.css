@@ -14,4 +14,24 @@
     .inpAuth {
       @apply flex flex-row p-2 mt-2  border-2 border-EWpurple;
     }
+
+    .headIcons {
+      @apply p-2 flex flex-row 
+    }
+
+    .headUtils {
+      @apply  flex flex-row text-2xl text-EWdarkPurple
+    }
+
+    .cardInfoProfile {
+      @apply w-full pt-3 px-16
+    }
+
+    .cardInfoRow {
+        @apply flex justify-between text-sm font-medium pt-3
+    }
+
+    .cardButton {
+        @apply flex items-center cursor-pointer hover:bg-EWpurple hover:text-EWdarkBlue ease-linear duration-200 rounded-lg p-1
+    }
 }
