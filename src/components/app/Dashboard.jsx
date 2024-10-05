@@ -1,25 +1,53 @@
 // import React from 'react'
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CiSearch, CiBellOn, CiSun, CiCloudMoon, CiCircleChevUp, CiCircleChevDown, CiSquarePlus} from "react-icons/ci";
 import { AuthContext } from "../../localStorage/userData";
 import logo from "../../assets/cwhlogo.png";
 import profilePic from "../../assets/cwhface.png";
 import { useNavigate } from "react-router-dom";
+import DisplayCard from "./DisplayCard";
 export default function Dashboard() {  
   const navigate = useNavigate();
   const {state} = useContext(AuthContext);
+  
+  // const username = state.user.username;
+  
+  const divRef = useRef(null); // Reference to the div
+  const [divSize, setDivSize] = useState({ width: 0, height: 0 });
+  const [dashWidth, setDashWidth] = useState(null);
+  const updateDivSize = () => {
+    if (divRef.current) {
+      setDivSize({
+        width: divRef.current.offsetWidth,
+        height: divRef.current.offsetHeight,
+      });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateDivSize);
+    updateDivSize();
+  }, []);
+
+
+  useEffect(() => {
+    setDashWidth( divSize.width - (divSize.width * 0.25));
+    console.log( dashWidth );
+  }, [divSize]);
+
   return (
-    <div className="h-screen w-full bg-EWpurple/50 px-5 py-2">
-      <div className="bg-white w-full h-full rounded-lg flex">
+    <div className="appStackPages">
+      <div 
+      ref={divRef} 
+      className="bg-white w-full h-full rounded-lg flex">
         
         {/* profile block */}
         <div className="flex flex-col w-1/4">
-          <div className="m-4 flex items-center">
+          <div className="eWalletHeroLogo">
             <img 
-              className="w-16 rounded-3xl"
               src={logo} 
               alt="cuteEWalletHeroLogo" />
-            <h1 className="text-xl font-medium pl-3">E-Wallet Hero</h1>
+            <h1>E-Wallet Hero</h1>
           </div>
           {/* profile */}
           <div className="flex flex-col items-center justify-center">
@@ -56,7 +84,7 @@ export default function Dashboard() {
         </div>
         
         {/* dashboard block */}
-        <div>
+        <div >
           <div className="flex justify-between items-center p-5">
             <div>
               <h1 className="text-3xl font-medium">Dashboard</h1>
@@ -77,14 +105,23 @@ export default function Dashboard() {
           {/* dashboard content */}
           {/* cards */}
           <div className="px-5">
-            <div >
-              <h1 className="text-2xl font-medium">Your Cards</h1>
+            <div className="">
+              <div className="flex  justify-between items-end">
+                <h1 className="text-2xl font-medium">Your Cards</h1>
+                <p 
+                onClick={() => {navigate("/appStack/viewCards")}}
+                className="text-sm font-medium hover:text-EWred ease-linear duration-200 cursor-pointer">View all Cards</p>
+              </div>
+              <div className={`flex justify-start items-center `} style={{width: dashWidth}}>
+                <DisplayCard/>
+                
+                {/* create card */}
+                <div 
+                  onClick={() => {navigate("/appStack/addcard")}}
+                  className="text-7xl text-EWdarkBlue hover:text-EWred ease-linear duration-200 cursor-pointer">
+                  <CiSquarePlus/>
+                </div>
 
-              {/* create card */}
-              <div 
-                onClick={() => {navigate("/addcard")}}
-                className="text-7xl text-EWdarkBlue hover:text-EWred ease-linear duration-200 cursor-pointer">
-                <CiSquarePlus/>
               </div>
             </div>
           </div>

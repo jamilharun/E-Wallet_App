@@ -13,6 +13,9 @@ export default {
         'EWdarkPurple': '#764d79',
         'EWdarkBlue': '#333159',
       },
+      backgroundImage: {
+        'hero': "url('/src/assets/cwhface.png')",
+      }
     },
     
   },

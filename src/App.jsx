@@ -9,7 +9,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/*" element={<AuthStack />} />
-          <Route path="/appStack" element={<AppStack />} />
+          <Route path="/appStack/*" element={<AppStack />} />
         </Routes>
       </Router>
     </>

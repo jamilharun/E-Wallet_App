@@ -34,4 +34,92 @@
     .cardButton {
         @apply flex items-center cursor-pointer hover:bg-EWpurple hover:text-EWdarkBlue ease-linear duration-200 rounded-lg p-1
     }
+
+    .appStackPages {
+        @apply h-screen w-full bg-EWpurple/50 px-5 py-2
+    }
+
+    /* .appStackPagesContainer {
+      @apply bg-white w-full h-full rounded-lg flex
+    } */
+
+    /* e-wallet hero logo */
+    .eWalletHeroLogo {
+        @apply m-4 flex items-center
+    }
+
+    .eWalletHeroLogo img {
+        @apply w-16 rounded-3xl
+    }
+
+    .eWalletHeroLogo h1 {
+        @apply text-xl font-medium pl-3
+    }
+
+    /* add card container */
+    .addCardContainer {
+      @apply flex flex-col items-center justify-center
+    }
+
+    .addCardContainer h1 {
+      @apply text-2xl font-medium
+    }
+
+    .addCardContainer div {
+      @apply flex justify-between items-center w-full py-3 px-5 font-semibold
+    }
+  
+    .addCardContainer div div {
+      @apply w-1/2 flex justify-center items-center border-2 border-EWpurple border-l-4 border-y-0 border-r-0 rounded-l-full h-10
+    }
+
+    .addCardContainer div div p {
+      @apply text-lg text-center
+    }
+
+    .addCardContainer div input {
+      @apply w-1/2 text-lg border-2 border-EWpurple rounded-r-full p-1
+    }
+
+    .addCardMessage {
+      @apply text-center
+    }
+
+    .addCardButton {
+      @apply w-full flex justify-between items-end
+    }
+
+    .addCardButton div {
+      @apply w-full
+    }
+
+    .addCardButton .add {
+      @apply flex justify-center items-center text-EWdarkBlue text-xl font-medium rounded-lg text-center
+    }
+
+    .cardDesign {
+      @apply  min-w-60 h-36 border-2 bg-EWpurple rounded-xl m-2 bg-hero bg-no-repeat bg-cover text-white flex flex-col justify-between p-2
+    }
+
+    .highlight {
+      @apply border-EWred hover:border-EWdarkBlue ease-linear duration-200 
+    }
+
+    /* edit card */
+    .cardEdit {
+      @apply p-5  
+    }
+
+    .cardEdit div {
+      @apply grid grid-cols-2 gap-4 text-base
+    }
+
+    .cardEdit div input {
+      @apply border-EWpurple border-2 rounded-lg p-1 caret-EWpurple
+    }
+    
+    .cardEdit div div {
+      @apply flex justify-between items-center
+    }
 }
+
