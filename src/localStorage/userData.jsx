@@ -1,4 +1,4 @@
-import { createContext, useReducer, useEffect } from 'react';
+import { createContext, useReducer, useEffect, useState } from 'react';
 
 // Initial state
 export const initialState = {
@@ -58,6 +58,12 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  const [globalCardNumber, setGlobalCardNumber] = useState({selectedCardNumber: null});
+  
+  const setSelectedCardNumber = (cardNumber) => {
+    setGlobalCardNumber({selectedCardNumber: cardNumber});
+  };
+
   // Use effect to load registered users on component mount (optional for initial fetch)
   useEffect(() => {
     const registeredUsers = localStorage.getItem('registeredUsers');
@@ -72,7 +78,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ state, dispatch }}>
+    <AuthContext.Provider value={{ state, dispatch, globalCardNumber, setSelectedCardNumber }}>
       {children}
     </AuthContext.Provider>
   );

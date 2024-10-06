@@ -17,7 +17,7 @@ export default function AddCard() {
         cardholderName: state.user.username,
       });
 
-    const [Activity, setActivity] = useState("success");
+    const [Activity, setActivity] = useState(null);
     const handleSubmit = () => {
         
         setActivity("loading");
