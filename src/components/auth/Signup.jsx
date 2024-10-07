@@ -118,9 +118,9 @@ export default function Signup() {
                 ref={swapRef}
                 onClick={() => {hanndleSwap()}}
                 className="pt-10 text-center h-1/4 flex flex-col justify-center items-center">
-                    <p className="text-3xl">Registration Successful</p>
+                    <p className="text-3xl 2xl:text-4xl">Registration Successful</p>
                     <CiCircleCheck className="text-9xl text-green-500 my-5" />
-                    <p>click to login your Account</p>
+                    <p className="2xl:text-xl">click to login your Account</p>
                 </div>
             ) : (
                 <div>
@@ -141,7 +141,7 @@ export default function Signup() {
                     <div 
                     ref={signupRef}
                     className=" flex flex-col justify-center items-center">
-                        <p className="text-lg">please Please Fill in your credentials</p>
+                        <p className="text-lg 2xl:text-2xl">please Please Fill in your credentials</p>
                         <div className="lanInpCon">
                             <p>UserName:</p>
                             <input 
@@ -177,7 +177,7 @@ export default function Signup() {
                         </div>
                         <div 
                         onClick={handleRegister}
-                        className="bg-EWpurple py-3 cursor-pointer hover:bg-EWblue ease-linear duration-300 px-10 mt-3 rounded-lg">
+                        className="bg-EWpurple py-3 cursor-pointer hover:bg-EWblue ease-linear duration-300 px-10 mt-3 rounded-lg 2xl:text-2xl">
                             <p>Register</p>
                         </div>
                     {isSuccess === false && <p>Registration failed. Please try again.</p>}  {/* Failure message */}
@@ -189,7 +189,7 @@ export default function Signup() {
                     >
                         <div className="w-1/2 mt-2">
                             <p 
-                            className="cursor-pointer text-sm hover:text-EWblue ease-linear duration-200"
+                            className="2xl:text-xl cursor-pointer text-sm hover:text-EWblue ease-linear duration-200"
                             >
                                 you have a account?
                             </p>

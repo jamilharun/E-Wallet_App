@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import logo from "../assets/cwhlogo.png";
 import happy from "../assets/cuteEWalletHero.png";
 import { AuthContext } from "../localStorage/userData";
@@ -6,9 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { validateForm } from "../functions/ValidationForm";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+
 export default function AddCard() {
     const navigate = useNavigate();
     const {state} = useContext(AuthContext);
+
+    gsap.registerPlugin(useGSAP);
 
     const [cardData, setCardData] = useState({
         cardNumber: "",
@@ -58,11 +63,27 @@ export default function AddCard() {
         }, 3000);
 
     };
+
+    // animarion block
+    // to lelt
+    const addCardRef = useRef(null)
+    const toleft = (loc) =>{
+      gsap.fromTo(addCardRef.current, { 
+        opacity: 1, x: 0  
+      }, { 
+        opacity: 0, x: 50, duration: 1, ease: 'power2.out', onComplete: ()=>{navigate(loc)}});
+    }
+
+    // top down
+    useEffect(() => {
+      // Animate the image, heading, and paragraph on component mount
+      gsap.fromTo(addCardRef.current, { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1, ease: 'power2.out'});
+    }, []);
     
 
       return (
         <div className="appStackPages">
-          <div className="h-full flex justify-center items-center">
+          <div ref={addCardRef} className="h-full flex justify-center items-center">
 
             {
                 Activity === "loading" &&
@@ -76,7 +97,7 @@ export default function AddCard() {
                     <div 
                     onClick={() => {
                       setActivity(null)
-                      navigate('/appStack/dashboard');
+                      toleft('/appStack/dashboard');
                     }}
                     className="z-20 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
                         <div className=" w-1/4  rounded-lg flex flex-row">
@@ -90,7 +111,7 @@ export default function AddCard() {
                     </div>
             }
 
-            <div className="bg-white w-1/4  rounded-lg flex flex-col">
+            <div className="bg-white md:w-1/4  rounded-lg flex flex-col">
               
               {/* E-Wallet Hero logo */}
               <div className="eWalletHeroLogo">
@@ -156,7 +177,7 @@ export default function AddCard() {
               </div>
               <div className="addCardButton">
                 <div className="back">
-                  <button onClick={()=>navigate('/appStack/dashboard')} className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
+                  <button onClick={()=>toleft('/appStack/dashboard')} className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
                 </div>
                 <div className="add">
                   <button onClick={handleSubmit} className=" bg-EWpurple text-white px-4 py-2 rounded">Add Card</button>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import logo from "../../assets/cwhlogo.png";
 import sad from "../../assets/cwhcrying.png";
 import shock from "../../assets/cwhshock.png";
@@ -6,9 +6,15 @@ import { AuthContext } from "../../localStorage/userData";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { CiLocationArrow1, CiSquarePlus } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+
 export default function ViewCard() {
     const navigate = useNavigate();
     const {state} = useContext(AuthContext);
+
+    gsap.registerPlugin(useGSAP);
 
     const username = state.user.username;
 
@@ -94,9 +100,24 @@ export default function ViewCard() {
         }, 2000);
       };
 
+      // animarion block
+    const animateRef = useRef(null)
+    const toleft = (loc) =>{
+      gsap.fromTo(animateRef.current, { 
+        opacity: 1, x: 0  
+      }, { 
+        opacity: 0, x: 50, duration: 1, ease: 'power2.out', onComplete: ()=>{navigate(loc)}});
+    }
+
+    // top down
+    useEffect(() => {
+      // Animate the image, heading, and paragraph on component mount
+      gsap.fromTo(animateRef.current, { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1, ease: 'power2.out'});
+    }, []);
+
   return (
     <div className="appStackPages">
-        <div className="h-full flex justify-center items-center">
+        <div ref={animateRef} className="h-full flex justify-center items-center">
             
             {/* loading */}
             {
@@ -172,7 +193,7 @@ export default function ViewCard() {
             }
 
             
-            <div className="bg-white w-1/2 max-h-full rounded-lg flex flex-col">
+            <div className="bg-white md:w-1/2 max-h-full rounded-lg flex flex-col">
                 <div className="flex justify-between">
                     <div className="eWalletHeroLogo">
                         <img 
@@ -182,10 +203,10 @@ export default function ViewCard() {
                     </div>
                     <div className="flex justify-center items-center gap-3 text-4xl text-EWdarkPurple pr-5">
                         <CiSquarePlus     
-                        onClick={()=>{navigate("/appStack/addcard")}}
+                        onClick={()=>{toleft("/appStack/addcard")}}
                         className="hover:text-EWred ease-linear duration-150"/>
                         <CiLocationArrow1 
-                        onClick={()=>{navigate("/appStack/dashboard")}}
+                        onClick={()=>{toleft("/appStack/dashboard")}}
                         className="hover:text-EWred ease-linear duration-150"/>
                         
                     </div>
@@ -197,61 +218,67 @@ export default function ViewCard() {
                     existingCards.map((card, index) => {
                         return (
                             <div key={index}>
-                                <div className="flex">
-                                    <div className="w-10 h-10 flex justify-center items-center p-0 m-0 mt-2 ml-2">
+                                <div className="flex max-[400px]:flex-col ">
+                                    <div className="w-10 h-10 flex justify-center items-center p-0 m-0 mt-2 ml-2 max-[400px]:hidden">
                                         <p className=" text-xl font-semibold ">{index + 1}</p>
                                     </div>
-                                    <div className="cardDesign">
-                                        <p className='text-md font-medium'>E-Wallet Hero</p>
-                                        <p className='texxl font-medium'>{card.cardNumber}</p>
-                                        <div className='flex justify-between'>
-                                            
-                                            <div>
-                                                <p className='text-xs'>cardholderName</p>
-                                                <p className='text-sm font-medium'>{card.cardholderName}</p>
-                                            </div>
-                                            <div >
-                                                <p className='text-xs'>Expiration Date</p>
-                                                <p className='text-sm font-medium'>{card.expirationDate}</p>
+                                    <div className="max-[400px]:flex max-[400px]:justify-center">
+                                        <div className="cardDesign">
+                                            <p className='text-md font-medium'>E-Wallet Hero</p>
+                                            <p className='texxl font-medium'>{card.cardNumber}</p>
+                                            <div className='flex justify-between'>
+                                                
+                                                <div>
+                                                    <p className='text-xs'>cardholderName</p>
+                                                    <p className='text-sm font-medium'>{card.cardholderName}</p>
+                                                </div>
+                                                <div >
+                                                    <p className='text-xs'>Expiration Date</p>
+                                                    <p className='text-sm font-medium'>{card.expirationDate}</p>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
-                                    <div className="w-full">
-                                        <p className='text-sm p-2 font-medium'>Card Number: {card.cardNumber}</p>
-                                        <p className="text-sm p-2 font-medium">Expiration Date: {card.expirationDate}</p>
-                                        <p className="text-sm p-2 font-medium">Cardholder Name: {card.cardholderName}</p>
-                                        <p className="text-sm p-2 font-medium">CVV: {card.cvv}</p>
-                                    </div>
-                                    <div className="w-full flex justify-end items-end p-2 gap-3">
-                                        {
-                                            onPopup.activate && onPopup.index === index ?
+                                    <div className="flex justify-between w-full">
+                                        <div className="">
+                                            <p className='text-sm p-2 font-medium'>Card Number: {card.cardNumber}</p>
+                                            <p className="text-sm p-2 font-medium">Expiration Date: {card.expirationDate}</p>
+                                            <p className="text-sm p-2 font-medium">Cardholder Name: {card.cardholderName}</p>
+                                            <p className="text-sm p-2 font-medium">CVV: {card.cvv}</p>
+                                        </div>
+                                        <div className=" flex justify-end items-end p-2 gap-3">
+                                            {
+                                                onPopup.activate && onPopup.index === index ?
+                                                <div 
+                                                onClick={()=>{
+                                                    setOnPopup({activate: false, option: null, index: null, loading: false})
+                                                    setEditCardData({
+                                                        cardNumber: "",
+                                                        expirationDate: "",
+                                                        cvv: "",
+                                                    })
+                                                }}
+                                                className="bg-EWdarkBlue cursor-pointer p-2 rounded-2xl text-sm font-bold text-white hover:bg-EWred ease-linear duration-200">
+                                                    Close
+                                                </div> :
+                                                <div 
+                                                onClick={()=>{setOnPopup((prevState)=>({...prevState,activate: true,  index: index}))}}
+                                                className="bg-EWblue cursor-pointer p-2 rounded-2xl text-sm font-bold text-white hover:bg-EWred ease-linear duration-200">
+                                                    Edit
+                                                </div>
+                                            }
+                                            
                                             <div 
                                             onClick={()=>{
-                                                setOnPopup({activate: false, option: null, index: null, loading: false})
-                                                setEditCardData({
-                                                    cardNumber: "",
-                                                    expirationDate: "",
-                                                    cvv: "",
-                                                })
+                                                setOnPopup((prevState)=>({...prevState, activate: true, option: "delete"}))
+                                                setForDeletion(card.cardNumber)
                                             }}
-                                            className="bg-EWdarkBlue cursor-pointer p-2 rounded-2xl text-sm font-bold text-white hover:bg-EWred ease-linear duration-200">
-                                                Close
-                                            </div> :
-                                            <div 
-                                            onClick={()=>{setOnPopup((prevState)=>({...prevState,activate: true,  index: index}))}}
-                                            className="bg-EWblue cursor-pointer p-2 rounded-2xl text-sm font-bold text-white hover:bg-EWred ease-linear duration-200">
-                                                Edit
+                                            className="bg-EWpurple cursor-pointer p-2 rounded-2xl text-sm font-bold text-white hover:bg-EWred ease-linear duration-200">
+                                                Delete
                                             </div>
-                                        }
-                                        
-                                        <div 
-                                        onClick={()=>{
-                                            setOnPopup((prevState)=>({...prevState, activate: true, option: "delete"}))
-                                            setForDeletion(card.cardNumber)
-                                        }}
-                                        className="bg-EWpurple cursor-pointer p-2 rounded-2xl text-sm font-bold text-white hover:bg-EWred ease-linear duration-200">
-                                            Delete
                                         </div>
+
                                     </div>
                                 </div>
 

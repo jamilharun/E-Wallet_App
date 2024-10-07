@@ -15,7 +15,21 @@ export default {
       },
       backgroundImage: {
         'hero': "url('/src/assets/cwhface.png')",
-      }
+      },
+      width: {
+        '400px': '400px',
+        '500px': '500px',
+        '600px': '600px',
+      },
+      height: {
+        '400px': '400px',
+        '500px': '500px',
+        '600px': '600px',
+        '700px': '700px',
+      },
+      maxWeight: {
+        '400px': '400px',
+      },
     },
     
   },

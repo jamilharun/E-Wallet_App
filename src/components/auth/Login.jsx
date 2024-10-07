@@ -141,7 +141,7 @@ export default function Login() {
     };
     
   return (
-    <div >
+    <div className='max-[400px]:w-full' >
         <div>
             {
                 isLoading ? (
@@ -160,7 +160,7 @@ export default function Login() {
             <div 
             ref={loginRef}
             className=" flex flex-col justify-center items-center">
-                <p className="text-lg">please input your credentials</p>
+                <p className="text-lg 2xl:text-3xl xl:text-2xl">please input your credentials</p>
                 <div className="lanInpCon">
                     <p>UserName:</p>
                     <input 
@@ -185,7 +185,7 @@ export default function Login() {
                 </div>
                 <div 
                 onClick={handleLogin}
-                className="cursor-pointer bg-EWpurple py-3 hover:bg-EWblue ease-linear duration-300 px-10 mt-3 rounded-lg">
+                className="cursor-pointer bg-EWpurple py-3 hover:bg-EWblue ease-linear duration-300 px-10 mt-3 rounded-lg 2xl:text-2xl xl:text-xl">
                     <p>Login</p>
                 </div>
 
@@ -203,7 +203,7 @@ export default function Login() {
         onClick={() => {hanndleSwap()}}
         >
             <div className="w-1/2 mt-2">
-                <p className="cursor-pointer text-sm hover:text-EWblue ease-linear duration-200">do not have a account?</p>
+                <p className="cursor-pointer text-sm hover:text-EWblue ease-linear duration-200 2xl:text-xl xl:text-lg">do not have a account?</p>
             </div>
         </div>
         

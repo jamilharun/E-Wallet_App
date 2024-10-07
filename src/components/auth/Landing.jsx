@@ -14,6 +14,9 @@ import { AuthContext } from "../../localStorage/userData";
 export default function Landing() {
   gsap.registerPlugin(useGSAP);
   
+  console.log(window.innerWidth);
+  window.addEventListener('resize', () =>{console.log(window.innerWidth);});
+
   const {state} = useContext(AuthContext);
   const stateData = state //not not be neessary but a meens to lot loss the data
 
@@ -40,10 +43,10 @@ export default function Landing() {
   },[stateData.loggedIn])
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      <div 
+    <div className="flex h-screen overflow-hidden ">
+      <div  
       ref={landingRef}
-      className="bg-EWpurple w-full flex flex-col justify-center items-center">
+      className="bg-EWpurple w-full flex flex-col justify-center items-center max-[400px]:hidden">
         <img
         ref={imageRef}
         src={hero} 
@@ -51,12 +54,12 @@ export default function Landing() {
         className="w-1/2" />
         <h1
         ref={headingRef} 
-        className="text-2xl text-center py-5">
+        className="text-2xl text-center py-5 2xl:text-5xl xl:text-4xl">
           E-Wallet Hero always got you back
         </h1>
         <p
         ref={paragraphRef} 
-        className="w-3/4 text-center">
+        className="w-3/4 text-center 2xl:text-xl xl:text-xl">
           Welcome to E-Wallet Hero, Welcome to [Your E-Wallet Name], where managing your money is simple and secure.
         </p>
       </div>

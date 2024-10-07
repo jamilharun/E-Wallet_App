@@ -30,7 +30,7 @@ export default function DisplayCard() {
     }, []);
     
   return (
-    <div className='overflow-x-scroll flex space-x-4'>
+    <div className='md:overflow-x-auto  flex space-x-4 '>
        
        {
         existingCards && 
@@ -43,8 +43,8 @@ export default function DisplayCard() {
                     className={`cardDesign ${isSelected ? 'highlight' : ''}`} 
                     onClick={() => handleCardSelect(index, card.cardNumber)}
                     key={index}>
-                        <p className='text-md font-medium'>E-Wallet Hero</p>
-                        <p className='texxl font-medium'>{card.cardNumber}</p>
+                        <p className='xl:text-lg font-medium 2xl:text-xl'>E-Wallet Hero</p>
+                        <p className='xl:text-xl font-medium 2xl:text-xl'>{card.cardNumber}</p>
                         <div className='flex justify-between'>
                             
                             <div>

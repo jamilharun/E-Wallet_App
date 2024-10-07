@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../localStorage/userData";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -6,10 +6,14 @@ import happy from "../../assets/cuteEWalletHero.png";
 import waitingReading from "../../assets/cwhwaitingreading.png";
 import sad from "../../assets/cwhsad.png";
 import logo from "../../assets/cwhlogo.png";
+import { sampleUsers } from "../../localStorage/users";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function SendMoney() {
     const navigate = useNavigate();
     const {state, globalCardNumber} = useContext(AuthContext);
+    gsap.registerPlugin(useGSAP);
   
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
@@ -17,10 +21,11 @@ export default function SendMoney() {
 
     const username = state.user.username;
 
+
     const [newTransaction, setNewTransaction] = useState(
         {
             id: transactions.length + 1,
-            type: "receive",
+            type: "send",
             cardNumber: globalCardNumber.selectedCardNumber,
             amount: null,
             date: new Date(),
@@ -31,12 +36,57 @@ export default function SendMoney() {
         }
     )
 
-    // const handleSendMoney = async () => {}
 
+    const handleSendMoney = () => {
+      console.log(newTransaction);
+      
+      if (newTransaction.cardNumber && newTransaction.amount && 
+        newTransaction.receiver) {
+          setNewTransaction((prevState)=>({
+            ...prevState,
+            status: "success",
+          }))
+      } else {
+        setNewTransaction((prevState)=>({
+          ...prevState,
+          status: "Pending",
+        }))
+      }
+
+      if (newTransaction.status === null) return setActivity("failed");
+      
+      console.log(newTransaction);
+      
+      setTimeout(() => {
+        setActivity("success");
+        const updatedTransactions = [...transactions, newTransaction];
+        localStorage.setItem("transactions", JSON.stringify(updatedTransactions));
+        
+      }, 3000);
+
+      
+    }
+
+
+          // animarion block
+          const animateRef = useRef(null)
+          const toRight = (loc) =>{
+            gsap.fromTo(animateRef.current, { 
+              opacity: 1, x: 0  
+            }, { 
+              opacity: 0, x: -50, duration: 1, ease: 'power2.out', onComplete: ()=>{navigate(loc)}});
+          }
+      
+          // top down
+          useEffect(() => {
+            // Animate the image, heading, and paragraph on component mount
+            gsap.fromTo(animateRef.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 1, ease: 'power2.out'});
+          }, []);
+      
 
     return (
     <div className="appStackPages">
-          <div className="h-full flex justify-center items-center">
+          <div ref={animateRef} className="h-full flex justify-center items-center">
 
             {
                 Activity === "loading" &&
@@ -103,7 +153,7 @@ export default function SendMoney() {
                     </div>
             }
 
-            <div className="bg-white w-1/4  rounded-lg flex flex-col">
+            <div className="bg-white md:w-1/4  rounded-lg flex flex-col">
               
               {/* E-Wallet Hero logo */}
               <div className="eWalletHeroLogo">
@@ -117,8 +167,32 @@ export default function SendMoney() {
                 <h1>Fund Transfer Form</h1>
                 
                 <div className="text-lg text-center ">
-                    <p className=" w-1/2 ">User Name</p>    
+                    <div>
+                      <p className=" w-1/2 ">User Name</p>    
+                    </div>
                     {/* <p className=" w-1/2 ">{newTransaction.cardNumber}</p> */}
+                    <select 
+                    className="w-1/2"
+                    onChange={(e)=>{
+                      const selectedUser = sampleUsers.find((user) => user.id === parseInt(e.target.value));
+                      console.log(selectedUser);
+                      
+                      if (selectedUser) {
+                        setNewTransaction((prevData)=>({
+                          ...prevData,
+                          receiver: selectedUser.name,
+                          img: selectedUser.img
+                        }))
+                      }
+                    }}>
+                      {
+                        sampleUsers.map((user, index) => {
+                          return (
+                            <option key={index} value={user.id}>{user.name}</option>
+                          )
+                        })
+                      }
+                    </select>
                 </div>
 
                 <div className="text-lg text-center ">
@@ -144,12 +218,12 @@ export default function SendMoney() {
               </div>
               <div className="addCardButton">
                 <div className="back">
-                  <button onClick={()=>navigate('/appStack/dashboard')} className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
+                  <button onClick={()=>toRight('/appStack/dashboard')} className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
                 </div>
                 <div className="add">
                     <button onClick={()=>{
                         setActivity("waiting"); 
-                        // handleRecieveMoney()
+                        handleSendMoney()
                     }} className=" bg-EWpurple text-white px-4 py-2 rounded">Submit</button>
                 </div>
                 <div className="placeholder">

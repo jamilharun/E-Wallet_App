@@ -1,20 +1,21 @@
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../localStorage/userData";
-import { useContext,  useEffect,  useState } from "react";
+import { useContext,  useEffect,  useRef,  useState } from "react";
 import happy from "../../assets/cuteEWalletHero.png";
 import waitingReading from "../../assets/cwhwaitingreading.png";
 import sad from "../../assets/cwhsad.png";
 import logo from "../../assets/cwhlogo.png";
 import { randomUsers } from "../../localStorage/users";
-import { updateBalance } from "../../functions/UpdateBalance";
-
+// import { updateBalance } from "../../functions/UpdateBalance";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function RecieveMoney() {
     const navigate = useNavigate();
     const {state, globalCardNumber} = useContext(AuthContext);
 
-    
+    gsap.registerPlugin(useGSAP);
     
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
     
@@ -87,7 +88,7 @@ export default function RecieveMoney() {
               const updatedTransactions = [...transactions, newTransaction];
               localStorage.setItem("transactions", JSON.stringify(updatedTransactions));
 
-              updateBalance(newTransaction.receiver, newTransaction.amount, newTransaction.cardNumber);
+              // updateBalance(newTransaction.receiver, newTransaction.amount, newTransaction.cardNumber);
             } else {
               setActivity("failed");
             }
@@ -110,13 +111,27 @@ export default function RecieveMoney() {
 
     useEffect(() => {
         if (!globalCardNumber.selectedCardNumber) {
-            navigate('/appStack/dashboard');
+            toRight('/appStack/dashboard');
         }
     }, []);
 
+    const animateRef = useRef(null)
+          const toRight = (loc) =>{
+            gsap.fromTo(animateRef.current, { 
+              opacity: 1, x: 0  
+            }, { 
+              opacity: 0, x: -50, duration: 1, ease: 'power2.out', onComplete: ()=>{navigate(loc)}});
+          }
+      
+          // top down
+          useEffect(() => {
+            // Animate the image, heading, and paragraph on component mount
+            gsap.fromTo(animateRef.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 1, ease: 'power2.out'});
+          }, []);
+
   return (
     <div className="appStackPages">
-          <div className="h-full flex justify-center items-center">
+          <div ref={animateRef} className="h-full flex justify-center items-center">
 
             {
                 Activity === "loading" &&
@@ -185,7 +200,7 @@ export default function RecieveMoney() {
                     </div>
             }
 
-            <div className="bg-white w-1/4  rounded-lg flex flex-col">
+            <div className="bg-white md:w-1/4  rounded-lg flex flex-col">
               
               {/* E-Wallet Hero logo */}
               <div className="eWalletHeroLogo">
@@ -220,7 +235,7 @@ export default function RecieveMoney() {
               </div>
               <div className="addCardButton">
                 <div className="back">
-                  <button onClick={()=>navigate('/appStack/dashboard')} className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
+                  <button onClick={()=>toRight('/appStack/dashboard')} className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
                 </div>
                 <div className="add">
                     <button onClick={()=>{

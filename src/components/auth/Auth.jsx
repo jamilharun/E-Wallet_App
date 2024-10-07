@@ -30,8 +30,8 @@ export default function Auth() {
 
   return (
     <div ref={authHeader} className="landingPages ">
-        <div className="text-center h-1/4 flex justify-center items-center">
-            <p className="text-4xl">E-Wallet Hero</p>
+        <div className="text-center h-1/4 flex justify-center items-center my-10">
+            <p className="text-4xl 2xl:text-6xl xl:text-5xl">E-Wallet Hero</p>
         </div>
         <Routes>
           <Route path="/*" element={<Login/>} />

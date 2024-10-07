@@ -16,7 +16,8 @@ export default function DisplaySubs() {
     const subscriptions = getsubs(); // Call the function to get the data
 
     return (
-      <div className="border-EWred border-4 rounded-lg space-y-2  overflow-y-auto flex flex-col transactcola">
+      <div className="border-EWred border-4 rounded-lg space-y-2  overflow-y-auto flex flex-col transactcola 
+      lg:h-400px  xl:w-full xl:h-96 2xl:w-72 2xl:h-500px">
         {
           subscriptions.map((sub) => (
             <div key={sub.id} className="flex justify-between items-center px-2">
@@ -32,13 +33,13 @@ export default function DisplaySubs() {
                 <div>
                     <p className="text-end text-xl">{sub.balance ? sub.balance : '0'}{sub.currency ? sub.currency : 'N/A'}</p>
                     <div className="flex">
-                        <p className="text-xl">{sub.monthly ? sub.monthly : 'N/A'}<span className="text-sm">{sub.currency ? sub.currency : 'N/A'}/m</span></p>
-                        <p className="text-xl">{sub.yearly ? sub.yearly : 'N/A'}<span className="text-sm">{sub.currency ? sub.currency : 'N/A'}/yrly</span></p>
+                        <p className="text-xl xl:text-lg">{sub.monthly ? sub.monthly : 'N/A'}<span className="text-sm ">{sub.currency ? sub.currency : 'N/A'}/m</span></p>
+                        <p className="text-xl xl:text-lg xl:hidden">{sub.yearly ? sub.yearly : 'N/A'}<span className="text-sm xl:hidden">{sub.currency ? sub.currency : 'N/A'}/yrly</span></p>
 
                     </div>
                 </div>
                 ) : (
-                  <p className="text-EWdarkBlue bg-EWred text-2xl rounded-lg font-semibold p-1">Follow</p>
+                  <p className="text-EWdarkBlue bg-EWred text-2xl xl:text-xl rounded-lg font-semibold xl:font-medium p-1">Follow</p>
                 )
               }
             </div>
