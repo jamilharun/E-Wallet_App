@@ -143,6 +143,13 @@ export default function RecieveMoney() {
             {
                 Activity === "failed" &&
                     <div 
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          setActivity(null);
+                        }
+                      }}
                     onClick={() => {
                       setActivity(null)
                       // navigate('/appStack/dashboard');
@@ -163,6 +170,13 @@ export default function RecieveMoney() {
             {
                 Activity === "success" &&
                     <div 
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          setActivity(null);
+                        }
+                      }}
                     onClick={() => {
                       setActivity(null)
                       // navigate('/appStack/dashboard');
@@ -235,10 +249,28 @@ export default function RecieveMoney() {
               </div>
               <div className="addCardButton">
                 <div className="back">
-                  <button onClick={()=>toRight('/appStack/dashboard')} className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
+                  <button 
+                  role="button"
+                  tabIndex="0"
+                  onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        toRight('/appStack/dashboard');
+                      }
+                    }}
+                  onClick={()=>toRight('/appStack/dashboard')} 
+                  className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
                 </div>
                 <div className="add">
-                    <button onClick={()=>{
+                    <button 
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          setActivity("waiting"); 
+                          handleRecieveMoney()
+                        }
+                      }}
+                    onClick={()=>{
                         setActivity("waiting"); 
                         handleRecieveMoney()
                     }} className=" bg-EWpurple text-white px-4 py-2 rounded">Submit</button>

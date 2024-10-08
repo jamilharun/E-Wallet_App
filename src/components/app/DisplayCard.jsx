@@ -41,6 +41,13 @@ export default function DisplayCard() {
                 return (
                     <div
                     className={`cardDesign ${isSelected ? 'highlight' : ''}`} 
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            handleCardSelect(index, card.cardNumber);
+                        }
+                    }}
                     onClick={() => handleCardSelect(index, card.cardNumber)}
                     key={index}>
                         <p className='xl:text-lg font-medium 2xl:text-xl'>E-Wallet Hero</p>

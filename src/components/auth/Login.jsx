@@ -139,6 +139,8 @@ export default function Login() {
           onComplete: () => navigate('/auth/signup') // Navigate after animation is complete
         });
     };
+
+
     
   return (
     <div className='max-[400px]:w-full' >
@@ -184,6 +186,13 @@ export default function Login() {
                     className="inpAuth"/>
                 </div>
                 <div 
+                role="button"
+                tabIndex="0"
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        handleLogin();
+                    }
+                  }}
                 onClick={handleLogin}
                 className="cursor-pointer bg-EWpurple py-3 hover:bg-EWblue ease-linear duration-300 px-10 mt-3 rounded-lg 2xl:text-2xl xl:text-xl">
                     <p>Login</p>
@@ -200,6 +209,13 @@ export default function Login() {
         <div
         ref={swapRef}
         className="flex justify-center items-center "
+        role="button"
+        tabIndex="0"
+        onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                hanndleSwap();
+            }
+          }}
         onClick={() => {hanndleSwap()}}
         >
             <div className="w-1/2 mt-2">

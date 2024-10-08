@@ -35,11 +35,17 @@ export default function Welcome() {
         });
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            console.log('Enter or Space key pressed');
+            
+            handleNavigate();
+        }
+    };
+
   return (
-    <div ref={containerRef} className="landingPages  ">
-        
-        
-        
+    <div className="landingPages  ">
+    
         <div className="h-3/5 max-[400px]:h-1/4 max-[400px]:pt-10 text-center flex flex-col justify-center items-center">
             <h1 className="text-3xl py-3 2xl:text-6xl xl:text-5xl">Welcome</h1>
             <h1 className="text-4xl font-semibold">To <span className="text-5xl">E-Wallet Hero</span></h1>
@@ -52,7 +58,10 @@ export default function Welcome() {
             src={hero} 
             alt="" />
 
-            <div 
+            <div
+            tabIndex="0"
+            role="button"
+            onKeyDown={handleKeyDown}
             className="cursor-pointer text-center bg-EWred py-4 mx-40 rounded-md 2xl:text-3xl xl:text-lg max-[400px]:w-full max-[400px]:mx-0 max-[400px]:rounded-full "
             onClick={handleNavigate}>
                 <p>Lets Get Started</p>

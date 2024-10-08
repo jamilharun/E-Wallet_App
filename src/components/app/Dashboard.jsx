@@ -129,6 +129,13 @@ export default function Dashboard() {
             </div>
             <div className="cardInfoProfile flex justify-between mt-5">
               <div 
+              role="button"
+              tabIndex="0"
+              onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    toTop("/appStack/sendingMoney");
+                  }
+                }}
               onClick={()=>{
                 toTop("/appStack/sendingMoney")
                 // navigate("/appStack/sendingMoney")
@@ -138,6 +145,13 @@ export default function Dashboard() {
                 <p>Send</p>
               </div>
               <div 
+              role="button"
+              tabIndex="0"
+              onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    toTop("/appStack/recieveMoney");
+                  }
+                }}
               onClick={() => toTop("/appStack/recieveMoney")}
               className="cardButton">
                 <CiCircleChevDown className="icons"/>
@@ -177,6 +191,13 @@ export default function Dashboard() {
                 <div className="flex  justify-between items-end ">
                   <h1 className="text-2xl font-medium">Your Cards</h1>
                   <p 
+                  role="button"
+                  tabIndex="0"
+                  onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        toTop("/appStack/viewCards");
+                      }
+                    }}
                   onClick={() => { toTop("/appStack/viewCards")}}
                   className="text-sm font-medium hover:text-EWred ease-linear duration-200 md:mr-20 cursor-pointer 2xl:text-xl">View all Cards</p>
                 </div>
@@ -184,6 +205,13 @@ export default function Dashboard() {
                   <DisplayCard/>
                   
                   <div 
+                  role="button"
+                  tabIndex="0"
+                  onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        toTop("/appStack/addcard");
+                      }
+                    }}
                     onClick={() => {toTop("/appStack/addcard")}}
                     className="text-7xl max-[400px]:text-9xl max-[400px]:pt-4 text-EWdarkBlue hover:text-EWred ease-linear duration-200 cursor-pointer">
                     <CiSquarePlus/>

@@ -15,12 +15,33 @@ export default function DisplayTransaction() {
     <div className=" w-fit h-fit md:w-500px">
         <div className="flex justify-end items-end rounded-b-lg absolute ">
           <p 
+          role="button"
+          tabIndex="0"
+          onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                setFilter("all");
+              }
+            }}
           onClick={()=>{setFilter("all")}} 
           className={` px-2 ${filter === "all" ? "bg-EWpurple" : "bg-EWred"}`}>All</p>
           <p 
+          role="button"
+          tabIndex="0"
+          onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                setFilter("Pending");
+              }
+            }}
           onClick={()=>{setFilter("Pending")}} 
           className={` px-2 ${filter === "Pending" ? "bg-EWpurple" : "bg-EWred"}`}>Pending</p>
           <p 
+          role="button"
+          tabIndex="0"
+          onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                setFilter("success");
+              }
+            }}
           onClick={()=>{setFilter("success")}} 
           className={`px-2 ${filter === "success" ? "bg-EWpurple" : "bg-EWred"}`}>Success</p>
         </div>

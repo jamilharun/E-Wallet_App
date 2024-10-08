@@ -95,6 +95,14 @@ export default function AddCard() {
             {
                 Activity === "success" &&
                     <div 
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          setActivity(null)
+                      toleft('/appStack/dashboard');
+                        }
+                      }}
                     onClick={() => {
                       setActivity(null)
                       toleft('/appStack/dashboard');
@@ -177,10 +185,26 @@ export default function AddCard() {
               </div>
               <div className="addCardButton">
                 <div className="back">
-                  <button onClick={()=>toleft('/appStack/dashboard')} className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
+                  <button 
+                  role="button"
+                  tabIndex="0"
+                  onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        toleft('/appStack/dashboard');
+                      }
+                    }}
+                  onClick={()=>toleft('/appStack/dashboard')} className=" bg-gray-500 text-white px-4 py-2 rounded">Back</button>
                 </div>
                 <div className="add">
-                  <button onClick={handleSubmit} className=" bg-EWpurple text-white px-4 py-2 rounded">Add Card</button>
+                  <button 
+                  role="button"
+                  tabIndex="0"
+                  onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        handleSubmit();
+                      }
+                    }}
+                  onClick={handleSubmit} className=" bg-EWpurple text-white px-4 py-2 rounded">Add Card</button>
                 </div>
                 <div className="placeholder">
                   

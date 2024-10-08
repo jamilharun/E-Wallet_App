@@ -116,6 +116,13 @@ export default function Signup() {
             isSuccess ? (
                 <div 
                 ref={swapRef}
+                role="button"
+                tabIndex="0"
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        hanndleSwap();
+                    }
+                  }}
                 onClick={() => {hanndleSwap()}}
                 className="pt-10 text-center h-1/4 flex flex-col justify-center items-center">
                     <p className="text-3xl 2xl:text-4xl">Registration Successful</p>
@@ -176,6 +183,13 @@ export default function Signup() {
                             className="inpAuth"/>
                         </div>
                         <div 
+                        role="button"
+                        tabIndex="0"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            handleRegister();
+                          }
+                        }}
                         onClick={handleRegister}
                         className="bg-EWpurple py-3 cursor-pointer hover:bg-EWblue ease-linear duration-300 px-10 mt-3 rounded-lg 2xl:text-2xl">
                             <p>Register</p>
@@ -185,6 +199,13 @@ export default function Signup() {
                     <div
                     ref={swapRef}
                     className="flex justify-center items-center "
+                    role="button"
+                        tabIndex="0"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            hanndleSwap();
+                          }
+                        }}
                     onClick={() => {hanndleSwap()}}
                     >
                         <div className="w-1/2 mt-2">

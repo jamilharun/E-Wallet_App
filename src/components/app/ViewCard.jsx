@@ -143,6 +143,19 @@ export default function ViewCard() {
                                 <div className="flex justify-between items-end ">
                                     <button 
                                     className="bg-EWblue text-white px-2 py-1 rounded-t-lg"
+                                    role="button"
+                                    tabIndex="0"
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            setOnPopup({activate: false, option: null, index: null, loading: false})
+                                        setEditCardData({
+                                            cardNumber: null,
+                                            expirationDate: "",
+                                            cvv: "",
+                                            cardholderName: username,
+                                        })
+                                        }
+                                        }}
                                     onClick={() => {
                                         setOnPopup({activate: false, option: null, index: null, loading: false})
                                         setEditCardData({
@@ -154,6 +167,12 @@ export default function ViewCard() {
                                     }}>cancel</button>
                                     <button 
                                     className="bg-EWred text-white px-2 py-1 rounded-t-lg"
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            setOnPopup((prevState)=>({...prevState, loading: true}))
+                                            handleEditSubmit();
+                                        }
+                                        }}
                                     onClick={() => {
                                         // deleteCard(); 
                                         setOnPopup((prevState)=>({...prevState, loading: true}))
@@ -179,9 +198,24 @@ export default function ViewCard() {
                                 <div className="flex justify-between items-end ">
                                     <button 
                                     className="bg-EWblue text-white px-2 py-1 rounded-t-lg"
+                                    role="button"
+                                    tabIndex="0"
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            setOnPopup({activate: false, option: null, index: null, loading: false})
+                                        }
+                                        }}
                                     onClick={() => setOnPopup({activate: false, option: null, index: null, loading: false})}>cancel</button>
                                     <button 
                                     className="bg-EWred text-white px-2 py-1 rounded-t-lg"
+                                    role="button"
+                                    tabIndex="0"
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            deleteCard(); 
+                                            setOnPopup((prevState)=>({...prevState, loading: true}))
+                                        }
+                                        }}
                                     onClick={() => {
                                         deleteCard(); 
                                         setOnPopup((prevState)=>({...prevState, loading: true}))
@@ -203,9 +237,23 @@ export default function ViewCard() {
                     </div>
                     <div className="flex justify-center items-center gap-3 text-4xl text-EWdarkPurple pr-5">
                         <CiSquarePlus     
+                        role="button"
+                        tabIndex="0"
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                toleft("/appStack/addcard")
+                            }
+                          }}
                         onClick={()=>{toleft("/appStack/addcard")}}
                         className="hover:text-EWred ease-linear duration-150"/>
                         <CiLocationArrow1 
+                        role="button"
+                        tabIndex="0"
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                toleft("/appStack/dashboard")
+                            }
+                          }}
                         onClick={()=>{toleft("/appStack/dashboard")}}
                         className="hover:text-EWred ease-linear duration-150"/>
                         
@@ -251,6 +299,18 @@ export default function ViewCard() {
                                             {
                                                 onPopup.activate && onPopup.index === index ?
                                                 <div 
+                                                role="button"
+                                                tabIndex="0"
+                                                onKeyDown={(e) => {
+                                                    if (e.key === 'Enter' || e.key === ' ') {
+                                                        setOnPopup({activate: false, option: null, index: null, loading: false})
+                                                        setEditCardData({
+                                                            cardNumber: "",
+                                                            expirationDate: "",
+                                                            cvv: "",
+                                                        })
+                                                    }
+                                                    }}
                                                 onClick={()=>{
                                                     setOnPopup({activate: false, option: null, index: null, loading: false})
                                                     setEditCardData({
@@ -263,6 +323,13 @@ export default function ViewCard() {
                                                     Close
                                                 </div> :
                                                 <div 
+                                                role="button"
+                                                tabIndex="0"
+                                                onKeyDown={(e) => {
+                                                    if (e.key === 'Enter' || e.key === ' ') {
+                                                        setOnPopup((prevState)=>({...prevState,activate: true,  index: index}))
+                                                    }
+                                                    }}
                                                 onClick={()=>{setOnPopup((prevState)=>({...prevState,activate: true,  index: index}))}}
                                                 className="bg-EWblue cursor-pointer p-2 rounded-2xl text-sm font-bold text-white hover:bg-EWred ease-linear duration-200">
                                                     Edit
@@ -270,6 +337,14 @@ export default function ViewCard() {
                                             }
                                             
                                             <div 
+                                            role="button"
+                                            tabIndex="0"
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter' || e.key === ' ') {
+                                                    setOnPopup((prevState)=>({...prevState, activate: true, option: "delete"}))
+                                                    setForDeletion(card.cardNumber)
+                                                }
+                                              }}
                                             onClick={()=>{
                                                 setOnPopup((prevState)=>({...prevState, activate: true, option: "delete"}))
                                                 setForDeletion(card.cardNumber)
@@ -322,6 +397,14 @@ export default function ViewCard() {
                                         </div>
                                         <button 
                                         className="mt-5 w-full bg-EWpurple p-2 rounded-2xl text-sm font-bold text-white hover:bg-EWred ease-linear duration-200"
+                                        role="button"
+                                        tabIndex="0"
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                setOnPopup((prevState)=>({...prevState, option: "edit"}))
+                                                setEditCardData((prevData)=>({...prevData, cardNumber: card.cardNumber}))
+                                            }
+                                            }}
                                         onClick={()=>{
                                             setOnPopup((prevState)=>({...prevState, option: "edit"}))
                                             setEditCardData((prevData)=>({...prevData, cardNumber: card.cardNumber}))
