@@ -103,9 +103,9 @@ export default function SendMoney() {
                       // navigate('/appStack/dashboard');
                     }}
                     className="z-50 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
-                        <div className=" w-1/4  rounded-lg flex flex-row">
-                          <img src={sad} alt="" />
-                          <div className="bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
+                        <div className=" md:w-1/4  rounded-lg flex flex-row justify-center">
+                          <img src={sad} alt="" className="max-[400px]:absolute max-[400px]:bottom-10"/>
+                          <div className="z-10 bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
                             <h1 className="text-8xl text-EWblue">Failed</h1>
                             <p className="text-3xl text-EWdarkBlue">Somethings Wrong</p>
 
@@ -123,9 +123,9 @@ export default function SendMoney() {
                       // navigate('/appStack/dashboard');
                     }}
                     className="z-50 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
-                        <div className=" w-1/4  rounded-lg flex flex-row">
-                          <img src={happy} alt="" />
-                          <div className="bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
+                        <div className=" w-1/4 rounded-lg flex flex-row justify-center">
+                          <img src={happy} alt="" className="max-[400px]:absolute max-[400px]:bottom-0"/>
+                          <div className="z-10 bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
                             <h1 className="text-8xl text-EWred">Success</h1>
                             <p className="text-3xl text-EWdarkBlue">Sending Money Successful</p>
 
@@ -139,9 +139,9 @@ export default function SendMoney() {
                     <div 
                     className="z-50 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
                         
-                        <div className=" w-1/4 rounded-lg flex flex-row">
-                          <img src={waitingReading} alt="e-wallet hero waiting reading" />
-                          <div className="bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl min-w-96">
+                        <div className=" w-1/4 rounded-lg flex flex-row justify-center">
+                          <img src={waitingReading} alt="e-wallet hero waiting reading" className="max-[400px]:absolute max-[400px]:-bottom-20"/>
+                          <div className="z-10 bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl min-w-96">
                             <h1 className="text-5xl text-EWred">Waiting for Sender</h1>
                             <p className="text-3xl text-EWdarkBlue">Transaction ID: {newTransaction.id}</p>
                             <p className="text-3xl text-EWdarkBlue">Reciever name: {newTransaction.receiver}</p>
@@ -153,7 +153,7 @@ export default function SendMoney() {
                     </div>
             }
 
-            <div className="bg-white md:w-1/4  rounded-lg flex flex-col">
+            <div className="bg-white lg:w-1/4 md:w-1/2  rounded-lg flex flex-col">
               
               {/* E-Wallet Hero logo */}
               <div className="eWalletHeroLogo">

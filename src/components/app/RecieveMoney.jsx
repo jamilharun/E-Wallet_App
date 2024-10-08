@@ -116,18 +116,18 @@ export default function RecieveMoney() {
     }, []);
 
     const animateRef = useRef(null)
-          const toRight = (loc) =>{
-            gsap.fromTo(animateRef.current, { 
-              opacity: 1, x: 0  
-            }, { 
-              opacity: 0, x: -50, duration: 1, ease: 'power2.out', onComplete: ()=>{navigate(loc)}});
-          }
-      
-          // top down
-          useEffect(() => {
-            // Animate the image, heading, and paragraph on component mount
-            gsap.fromTo(animateRef.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 1, ease: 'power2.out'});
-          }, []);
+    const toRight = (loc) =>{
+      gsap.fromTo(animateRef.current, { 
+        opacity: 1, x: 0  
+      }, { 
+        opacity: 0, x: -50, duration: 1, ease: 'power2.out', onComplete: ()=>{navigate(loc)}});
+    }
+
+    // top down
+    useEffect(() => {
+      // Animate the image, heading, and paragraph on component mount
+      gsap.fromTo(animateRef.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 1, ease: 'power2.out'});
+    }, []);
 
   return (
     <div className="appStackPages">
@@ -148,9 +148,9 @@ export default function RecieveMoney() {
                       // navigate('/appStack/dashboard');
                     }}
                     className="z-50 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
-                        <div className=" w-1/4  rounded-lg flex flex-row">
-                          <img src={sad} alt="" />
-                          <div className="bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
+                        <div className=" md:w-1/4  rounded-lg flex flex-row justify-center">
+                          <img src={sad} alt="" className="max-[400px]:absolute max-[400px]:bottom-10"/>
+                          <div className="z-10 bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
                             <h1 className="text-8xl text-EWblue">Failed</h1>
                             <p className="text-3xl text-EWdarkBlue">Somethings Wrong</p>
 
@@ -168,9 +168,9 @@ export default function RecieveMoney() {
                       // navigate('/appStack/dashboard');
                     }}
                     className="z-50 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
-                        <div className=" w-1/4  rounded-lg flex flex-row">
-                          <img src={happy} alt="" />
-                          <div className="bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
+                        <div className=" md:w-1/4  rounded-lg flex flex-row justify-center">
+                          <img src={happy} alt="" className="max-[400px]:absolute max-[400px]:bottom-0"/>
+                          <div className="z-10 bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
                             <h1 className="text-8xl text-EWred">Success</h1>
                             <p className="text-3xl text-EWdarkBlue">Wow you just Recieve. {newTransaction.amount}</p>
 
@@ -184,9 +184,9 @@ export default function RecieveMoney() {
                     <div 
                     className="z-50 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
                         
-                        <div className=" w-1/4 rounded-lg flex flex-row">
-                          <img src={waitingReading} alt="e-wallet hero waiting reading" />
-                          <div className="bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl min-w-96">
+                        <div className=" md:w-1/4 rounded-lg flex flex-row justify-center">
+                          <img src={waitingReading} alt="e-wallet hero waiting reading" className="max-[400px]:absolute max-[400px]:-bottom-20"/>
+                          <div className="z-10 bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl min-w-96">
                             <h1 className="text-5xl text-EWred">Waiting for Sender</h1>
                             <p className="text-3xl text-EWdarkBlue">
                                 Code: {Math.floor(1000 + Math.random() * 9000)} {/* Generates a 4-digit number */}

@@ -133,7 +133,7 @@ export default function ViewCard() {
                     <div className="z-10 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
 
                         
-                        <div className="bg-white w-1/4 h-1/4 rounded-lg border-EWred border-4 flex">
+                        <div className="bg-white md:w-1/4 h-1/4 rounded-lg border-EWred border-4 flex">
                             <img 
                             className="w-1/2 "
                             src={shock} 
@@ -169,7 +169,7 @@ export default function ViewCard() {
                     <div className="z-10 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
 
                         
-                        <div className="bg-white w-1/4 h-1/4 rounded-lg border-EWred border-4 flex">
+                        <div className="bg-white md:w-1/4 h-1/4 rounded-lg border-EWred border-4 flex">
                             <img 
                             className="w-1/2 "
                             src={sad} 

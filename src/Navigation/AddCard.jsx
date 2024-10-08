@@ -100,9 +100,9 @@ export default function AddCard() {
                       toleft('/appStack/dashboard');
                     }}
                     className="z-20 absolute w-screen h-screen backdrop-blur-sm flex justify-center items-center">
-                        <div className=" w-1/4  rounded-lg flex flex-row">
-                          <img src={happy} alt="" />
-                          <div className="bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
+                        <div className=" md:w-1/4  rounded-lg flex flex-row justify-center">
+                          <img src={happy} alt="" className="max-[400px]:absolute max-[400px]:bottom-0"/>
+                          <div className="z-10 bg-white h-full p-3 border-EWdarkBlue border-4 rounded-xl">
                             <h1 className="text-8xl text-EWred">Success</h1>
                             <p className="text-3xl text-EWdarkBlue">your new Card is ready!! :DD</p>
 
