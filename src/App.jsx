@@ -1,9 +1,8 @@
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import AuthStack from "./Navigation/AuthStack";
 import AppStack from "./Navigation/AppStack";
 function App() {
-  
   return (
     <>
       <Router>
@@ -13,7 +12,7 @@ function App() {
         </Routes>
       </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
